@@ -1,0 +1,37 @@
+ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    gap: 30px;
+}
+
+.btn-block {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+li {
+    padding: 10px 15px;
+    border: 1px solid lightgrey;
+    border-radius: 30px;
+}
+
+button {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-start {
+    background-color: lightgreen;
+}
+
+.btn-stop {
+    background-color: lightcoral;
+}
+
+.btn-reset {
+    background-color: cornflowerblue;
+}
