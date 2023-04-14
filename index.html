@@ -4,36 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/2f0ddac195.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./style.css/style.css">
+    <link rel="stylesheet" href="./style/style.css">
     <title>Timer</title>
 </head>
 <body>
-    <ul>
-        <li><span>+1m</span></li>
-        <li><span>+5m</span></li>
-        <li><span>+10m</span></li>
-        <li><span>+15m</span></li>
+    <ul class="add-time">
+        <li data-time="60">+1m</li>
+        <li data-time="300">+5m</li>
+        <li data-time="600">+10m</li>
+        <li data-time="900">+15m</li>
     </ul>
-    <div>
-
-
-
+    <div class="timer">
+         00:00:00.00
     </div>
 
-    <ul>
-        <li><span>1 minute</span></li>
-        <li><span>2 minutes</span></li>
-        <li><span>5 minutes</span></li>
-        <li><span>10 minutes</span></li>
-        <li><span>15 minutes</span></li>
+    <ul class="set-time">
+        <li data-time="60">1 minute</li>
+        <li data-time="120">2 minutes</li>
+        <li data-time="300">5 minutes</li>
+        <li data-time="600">10 minutes</li>
+        <li data-time="900">15 minutes</li>
     </ul>
 
 <div class="btn-block">
-    <button class="btn-start"><i class="fa-solid fa-play fa-2xl" style="color: #fafafa;"></i></button>
-    <button class="btn-stop"><i class="fa-solid fa-stop fa-2xl" style="color: #fafafa;"></i></button>
-    <button class="btn-reset"><i class="fa-sharp fa-solid fa-rotate-right fa-2xl" style="color: #fafafa;"></i></button>
+    <button class="btn-start"></button>
+    <button class="btn-stop"></button>
+    <button class="btn-reset"></button>
 </div>
     <script src="./script/script.js"></script>
+    <!-- <script src="./script/script_1.js"></script> -->
 </body>
 </html>
