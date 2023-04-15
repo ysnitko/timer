@@ -1,101 +1,117 @@
-let intervalId;
-let time = 0;
-let milliseconds = 0;
-const startTime = document.querySelector('.btn-start');
-const stopTime = document.querySelector('.btn-stop');
-const resetTime = document.querySelector('.btn-reset');
-const btnContainer = document.querySelector('.btn-block');
-const addTimer = document.querySelector('.timer');
-const setTime = document.querySelector('.set-time');
-const addTime = document.querySelector('.add-time');
-
-function start() {
-  if (intervalId) {
-    return;
+class Timer {
+  constructor() {
+    this.intervalId;
+    this.time = 0;
+    this.milliseconds = 0;
+    this.startTime = document.querySelector('.btn-start');
+    this.stopTime = document.querySelector('.btn-stop');
+    this.resetTime = document.querySelector('.btn-reset');
+    this.btnContainer = document.querySelector('.btn-block');
+    this.addTimer = document.querySelector('.timer');
+    this.setTime = document.querySelector('.set-time');
+    this.addTime = document.querySelector('.add-time');
+    this.start = this.start.bind(this);
+    this.timer = this.timer.bind(this);
+    this.stop = this.stop.bind(this);
+    this.reset = this.reset.bind(this);
+    this.onClickBtn = this.onClickBtn.bind(this);
+    this.setTimeValue = this.setTimeValue.bind(this);
+    this.addTimeValue = this.addTimeValue.bind(this);
   }
-  intervalId = setInterval(() => {
-    if (milliseconds === 0 && time === 0) {
-      clearInterval(intervalId);
+
+  start() {
+    if (this.intervalId) {
       return;
     }
-    if (milliseconds === 0) {
-      time--;
-      milliseconds = 1000;
+    this.intervalId = setInterval(() => {
+      if (this.milliseconds === 0 && this.time === 0) {
+        clearInterval(this.intervalId);
+        return;
+      }
+      if (this.milliseconds === 0) {
+        this.time--;
+        this.milliseconds = 1000;
+      }
+      this.milliseconds -= 50;
+      this.timer();
+    }, 50);
+  }
+
+  timer() {
+    const hours = Math.floor(this.time / 3600)
+      .toString()
+      .padStart(2, '0');
+    const minutes = Math.floor((this.time / 60) % 60)
+      .toString()
+      .padStart(2, '0');
+    const seconds = Math.floor(this.time % 60)
+      .toString()
+      .padStart(2, '0');
+    const mili = this.milliseconds.toString().padStart(2, '0').slice(0, 2);
+    this.addTimer.textContent = `${hours}:${minutes}:${seconds}.${mili}`;
+  }
+
+  stop() {
+    clearInterval(this.intervalId);
+    this.intervalId = 0;
+  }
+
+  reset() {
+    clearInterval(this.intervalId);
+    this.time = 0;
+    this.milliseconds = 0;
+    this.addTimer.textContent = '00:00:00.00';
+    this.intervalId = 0;
+  }
+
+  onClickBtn(event) {
+    let target = event.target;
+    if (target.tagName !== 'BUTTON') {
+      return;
     }
-    milliseconds -= 50;
-    timer();
-  }, 50);
-}
 
-function timer() {
-  const hours = Math.floor(time / 3600)
-    .toString()
-    .padStart(2, '0');
-  const minutes = Math.floor((time / 60) % 60)
-    .toString()
-    .padStart(2, '0');
-  const seconds = Math.floor(time % 60)
-    .toString()
-    .padStart(2, '0');
-  const mili = milliseconds.toString().padStart(2, '0').slice(0, 2);
-  addTimer.textContent = `${hours}:${minutes}:${seconds}.${mili}`;
-}
+    if (target === this.startTime) {
+      this.start();
+    }
 
-function stop() {
-  clearInterval(intervalId);
-  intervalId = 0;
-}
+    if (target === this.stopTime) {
+      this.stop();
+    }
 
-function reset() {
-  clearInterval(intervalId);
-  time = 0;
-  milliseconds = 0;
-  addTimer.textContent = '00:00:00.00';
-  intervalId = 0;
-}
-
-function onClickBtn(event) {
-  let target = event.target;
-  if (target.tagName !== 'BUTTON') {
-    return;
+    if (target === this.resetTime) {
+      this.reset();
+    }
   }
 
-  if (target === startTime) {
-    start();
+  setTimeValue(event) {
+    let target = event.target;
+    if (target.tagName !== 'LI') {
+      return;
+    }
+    let timeValue = +target.dataset.time;
+    let setMinutes = (timeValue / 60).toString().padStart(2, '0');
+    this.reset();
+    this.time = timeValue;
+    this.addTimer.textContent = `00:${setMinutes}:00.00`;
   }
 
-  if (target === stopTime) {
-    stop();
+  addTimeValue(event) {
+    let target = event.target;
+    if (target.tagName !== 'LI') {
+      return;
+    }
+    let timeValue = +target.dataset.time;
+    this.stop();
+    this.time += timeValue;
+    this.timer();
   }
 
-  if (target === resetTime) {
-    reset();
+  init() {
+    this.setTime.addEventListener('click', this.setTimeValue);
+    this.addTime.addEventListener('click', this.addTimeValue);
+    this.btnContainer.addEventListener('click', this.onClickBtn);
   }
 }
 
-function setTimeValue(event) {
-  let target = event.target;
-  if (target.tagName !== 'LI') {
-    return;
-  }
-  let timeValue = +target.dataset.time;
-  let setMinutes = (timeValue / 60).toString().padStart(2, '0');
-  reset();
-  time = timeValue;
-  addTimer.textContent = `00:${setMinutes}:00.00`;
-}
-
-function addTimeValue(event) {
-  let target = event.target;
-  if (target.tagName !== 'LI') {
-    return;
-  }
-  let timeValue = +target.dataset.time;
-  stop();
-  time += timeValue;
-  timer();
-}
-
-setTime.addEventListener('click', setTimeValue);
-addTime.addEventListener('click', addTimeValue);
-btnContainer.addEventListener('click', onClickBtn);
+const timer = new Timer();
+timer.init();
