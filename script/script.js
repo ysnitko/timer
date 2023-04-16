@@ -10,13 +10,13 @@ class Timer {
     this.addTimer = document.querySelector('.timer');
     this.setTime = document.querySelector('.set-time');
     this.addTime = document.querySelector('.add-time');
-    this.start = this.start.bind(this);
-    this.timer = this.timer.bind(this);
-    this.stop = this.stop.bind(this);
-    this.reset = this.reset.bind(this);
     this.onClickBtn = this.onClickBtn.bind(this);
     this.setTimeValue = this.setTimeValue.bind(this);
     this.addTimeValue = this.addTimeValue.bind(this);
+    this.start();
+    this.timer();
+    this.stop();
+    this.reset();
   }
 
   start() {
