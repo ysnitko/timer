@@ -9,12 +9,18 @@
 }
 
 .timer {
+    display: flex;
+    flex-direction: row;
     margin: 0 auto;
-    /* width: 50%; */
     font-family: 'Digital-7', sans-serif;
     font-style: italic;
     text-align: center;
     font-size: 100px;
+}
+
+.timer span {
+    display: block;
+    width: 95px;
 }
 
 ul {
@@ -48,6 +54,10 @@ button {
     cursor: pointer;
 }
 
+.milisec {
+    min-width: 10%;
+}
+
 .btn-start {
     background: url(../img/play.svg) no-repeat center lightgreen;
 }
@@ -62,7 +72,7 @@ button {
 
 @media screen and (max-width: 600px) {
     .timer {
-        font-size: 70px;
+        font-size: 80px;
     }
     
     ul {
@@ -72,4 +82,8 @@ button {
     li {
         font-size: 10px;
     }
+
+    .timer span {
+        width: 75px;
+    } 
 }

@@ -48,7 +48,7 @@ class Timer {
       .toString()
       .padStart(2, '0');
     const mili = this.milliseconds.toString().padStart(2, '0').slice(0, 2);
-    this.addTimer.textContent = `${hours}:${minutes}:${seconds}.${mili}`;
+    this.addTimer.innerHTML = `<span>${hours}</span>:<span>${minutes}</span>:<span>${seconds}</span>.<span>${mili}</span>`;
   }
 
   stop() {
@@ -60,7 +60,8 @@ class Timer {
     clearInterval(this.intervalId);
     this.time = 0;
     this.milliseconds = 0;
-    this.addTimer.textContent = '00:00:00.00';
+    this.addTimer.innerHTML =
+      '<span>00</span>:<span>00</span>:<span>00</span>.<span>00</span>';
     this.intervalId = 0;
   }
 
@@ -92,7 +93,7 @@ class Timer {
     let setMinutes = (timeValue / 60).toString().padStart(2, '0');
     this.reset();
     this.time = timeValue;
-    this.addTimer.textContent = `00:${setMinutes}:00.00`;
+    this.addTimer.innerHTML = `<span>00</span>:<span>${setMinutes}</span>:<span>00</span>.<span>00</span>`;
   }
 
   addTimeValue(event) {
