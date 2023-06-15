@@ -54,10 +54,6 @@ button {
     cursor: pointer;
 }
 
-.milisec {
-    min-width: 10%;
-}
-
 .btn-start {
     background: url(../img/play.svg) no-repeat center lightgreen;
 }
@@ -72,7 +68,7 @@ button {
 
 @media screen and (max-width: 600px) {
     .timer {
-        font-size: 80px;
+        font-size: 75px;
     }
     
     ul {
