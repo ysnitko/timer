@@ -3,9 +3,14 @@
     src: url('../font/FontsFree-Net-digital-7-italic.ttf');
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
 .timer {
     margin: 0 auto;
-    width: 50%;
+    /* width: 50%; */
     font-family: 'Digital-7', sans-serif;
     font-style: italic;
     text-align: center;
@@ -14,6 +19,7 @@
 
 ul {
     display: flex;
+    padding: 0;
     justify-content: center;
     list-style-type: none;
     gap: 30px;
@@ -52,4 +58,18 @@ button {
 
 .btn-reset {
     background: url(../img/reset.svg) no-repeat center  cornflowerblue;
+}
+
+@media screen and (max-width: 600px) {
+    .timer {
+        font-size: 70px;
+    }
+    
+    ul {
+        gap: 10px;
+    }
+
+    li {
+        font-size: 10px;
+    }
 }
